@@ -20,6 +20,11 @@ autenticação, envio de vídeo, acompanhamento de status e download dos pacotes
 
 - Node ≥ 22 e npm.
 
+## Configuração
+
+O endereço da API vem da variável `VITE_API_URL` (ver [`.env.example`](.env.example)). Sem ela,
+o padrão é `http://localhost:3000`.
+
 ## Instalação
 
 ```bash
@@ -73,6 +78,8 @@ src/
 ├── main.ts                   # bootstrap da aplicação Vue
 ├── App.vue                   # componente raiz
 ├── router/                   # configuração do Vue Router
+├── views/                    # telas (cadastro)
+├── services/                 # cliente HTTP e chamadas à API
 ├── assets/                   # estilos base
 └── __tests__/                # testes de unidade
 ```
