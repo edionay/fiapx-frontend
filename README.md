@@ -78,7 +78,7 @@ src/
 ├── main.ts                   # bootstrap da aplicação Vue
 ├── App.vue                   # componente raiz
 ├── router/                   # configuração do Vue Router
-├── views/                    # telas (login e cadastro)
+├── views/                    # telas (login, cadastro e envio de vídeo)
 ├── services/                 # cliente HTTP e chamadas à API
 ├── composables/              # estado de sessão (token JWT)
 ├── assets/                   # estilos base

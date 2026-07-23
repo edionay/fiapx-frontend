@@ -52,9 +52,15 @@ function sair(): void {
       <template v-if="autenticado">
         <h2 class="text-xl font-semibold text-slate-900">Você está conectado</h2>
         <p class="mt-1 text-sm text-slate-500">Sua sessão está ativa neste dispositivo.</p>
+        <RouterLink
+          to="/enviar"
+          class="mt-6 block w-full rounded-lg bg-slate-900 px-4 py-2 text-center text-sm font-medium text-white hover:bg-slate-800"
+        >
+          Enviar vídeo
+        </RouterLink>
         <button
           type="button"
-          class="mt-6 w-full rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+          class="mt-3 w-full rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
           @click="sair"
         >
           Sair
