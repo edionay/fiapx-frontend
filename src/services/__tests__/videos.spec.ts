@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
-import { enviarVideo } from '../videos'
+import { baixarVideo, enviarVideo, listarVideos } from '../videos'
 
 afterEach(() => {
   vi.unstubAllGlobals()
@@ -37,5 +37,41 @@ describe('enviarVideo', () => {
 
     const arquivo = new File(['x'], 'a.mp4', { type: 'video/mp4' })
     await expect(enviarVideo(arquivo, 'jwt')).rejects.toThrow('Não autorizado')
+  })
+})
+
+describe('listarVideos', () => {
+  it('busca os vídeos com o token', async () => {
+    const lista = [{ id: 'v1', nomeOriginal: 'a.mp4', status: 'CONCLUIDO' }]
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(lista),
+    })
+    vi.stubGlobal('fetch', fetchMock)
+
+    const resultado = await listarVideos('jwt-123')
+
+    expect(resultado).toEqual(lista)
+    const [url, opcoes] = fetchMock.mock.calls[0] as [string, RequestInit]
+    expect(url).toContain('/videos')
+    expect((opcoes.headers as Record<string, string>).Authorization).toBe('Bearer jwt-123')
+  })
+})
+
+describe('baixarVideo', () => {
+  it('busca o pacote como blob usando o token', async () => {
+    const blob = new Blob(['zip'], { type: 'application/zip' })
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      blob: () => Promise.resolve(blob),
+    })
+    vi.stubGlobal('fetch', fetchMock)
+
+    const resultado = await baixarVideo('v1', 'jwt-123')
+
+    expect(resultado).toBe(blob)
+    const [url, opcoes] = fetchMock.mock.calls[0] as [string, RequestInit]
+    expect(url).toContain('/videos/v1/download')
+    expect((opcoes.headers as Record<string, string>).Authorization).toBe('Bearer jwt-123')
   })
 })
