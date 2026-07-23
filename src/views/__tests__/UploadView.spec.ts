@@ -5,7 +5,10 @@ import { enviarVideo } from '../../services/videos'
 import { ErroApi } from '../../services/http'
 import { useSessao } from '../../composables/useSessao'
 
-vi.mock('vue-router', () => ({ useRouter: () => ({ push: vi.fn() }) }))
+vi.mock('vue-router', () => ({
+  useRouter: () => ({ push: vi.fn() }),
+  RouterLink: { template: '<a><slot /></a>' },
+}))
 vi.mock('../../services/videos', () => ({ enviarVideo: vi.fn() }))
 
 const enviarMock = vi.mocked(enviarVideo)

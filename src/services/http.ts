@@ -42,3 +42,20 @@ export async function postForm<T>(caminho: string, form: FormData, token?: strin
 
   return tratar<T>(resposta)
 }
+
+export async function getJson<T>(caminho: string, token?: string): Promise<T> {
+  const resposta = await fetch(`${baseUrl}${caminho}`, { headers: autorizacao(token) })
+
+  return tratar<T>(resposta)
+}
+
+export async function getBlob(caminho: string, token?: string): Promise<Blob> {
+  const resposta = await fetch(`${baseUrl}${caminho}`, { headers: autorizacao(token) })
+
+  if (!resposta.ok) {
+    const dados = (await resposta.json().catch(() => null)) as { erro?: string } | null
+    throw new ErroApi(dados?.erro ?? `Erro ${resposta.status}`, resposta.status)
+  }
+
+  return resposta.blob()
+}

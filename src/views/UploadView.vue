@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { enviarVideo, type VideoEnviado } from '../services/videos'
 import { ErroApi } from '../services/http'
 import { useSessao } from '../composables/useSessao'
@@ -51,9 +51,10 @@ function sair(): void {
   <div class="mx-auto max-w-lg">
     <div class="mb-4 flex items-center justify-between">
       <h2 class="text-xl font-semibold text-slate-900">Enviar vídeo</h2>
-      <button type="button" class="text-sm font-medium text-slate-500 hover:text-slate-900" @click="sair">
-        Sair
-      </button>
+      <div class="flex items-center gap-4 text-sm font-medium">
+        <RouterLink to="/videos" class="text-slate-500 hover:text-slate-900">Meus vídeos</RouterLink>
+        <button type="button" class="text-slate-500 hover:text-slate-900" @click="sair">Sair</button>
+      </div>
     </div>
 
     <div class="rounded-xl border border-slate-200 bg-white p-8 shadow-sm">
@@ -83,13 +84,17 @@ function sair(): void {
         </button>
       </form>
 
-      <p
-        v-if="enviado"
-        role="status"
-        class="mt-6 rounded-lg bg-emerald-50 px-4 py-3 text-sm text-emerald-700"
-      >
-        Vídeo recebido e na fila de processamento (status {{ enviado.status }}).
-      </p>
+      <div v-if="enviado" class="mt-6">
+        <p role="status" class="rounded-lg bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+          Vídeo recebido e na fila de processamento (status {{ enviado.status }}).
+        </p>
+        <RouterLink
+          to="/videos"
+          class="mt-3 block text-center text-sm font-medium text-slate-900 hover:underline"
+        >
+          Acompanhar em meus vídeos
+        </RouterLink>
+      </div>
     </div>
   </div>
 </template>

@@ -21,6 +21,12 @@ const router = createRouter({
       component: () => import('../views/UploadView.vue'),
       meta: { requerAuth: true },
     },
+    {
+      path: '/videos',
+      name: 'videos',
+      component: () => import('../views/ListaView.vue'),
+      meta: { requerAuth: true },
+    },
   ],
 })
 
