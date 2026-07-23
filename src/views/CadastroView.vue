@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+import { RouterLink } from 'vue-router'
 import { cadastrar } from '../services/autenticacao'
 import { ErroApi } from '../services/http'
 
@@ -45,13 +46,16 @@ async function enviar(): Promise<void> {
       <h2 class="text-xl font-semibold text-slate-900">Criar conta</h2>
       <p class="mt-1 text-sm text-slate-500">Use seu e-mail e uma senha para começar.</p>
 
-      <p
-        v-if="concluido"
-        role="status"
-        class="mt-6 rounded-lg bg-emerald-50 px-4 py-3 text-sm text-emerald-700"
-      >
-        Conta criada com sucesso.
-      </p>
+      <div v-if="concluido" class="mt-6">
+        <p role="status" class="rounded-lg bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+          Conta criada com sucesso.
+        </p>
+        <p class="mt-6 text-center text-sm text-slate-500">
+          <RouterLink to="/login" class="font-medium text-slate-900 hover:underline">
+            Ir para o login
+          </RouterLink>
+        </p>
+      </div>
 
       <form v-else novalidate class="mt-6 space-y-4" @submit.prevent="enviar">
         <p v-if="erroGeral" role="alert" class="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">
@@ -106,6 +110,13 @@ async function enviar(): Promise<void> {
         >
           {{ enviando ? 'Criando...' : 'Criar conta' }}
         </button>
+
+        <p class="text-center text-sm text-slate-500">
+          Já tem conta?
+          <RouterLink to="/login" class="font-medium text-slate-900 hover:underline">
+            Entrar
+          </RouterLink>
+        </p>
       </form>
     </div>
   </div>
