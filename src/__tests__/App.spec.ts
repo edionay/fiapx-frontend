@@ -1,10 +1,13 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import App from '../App.vue'
+import router from '../router'
 
 describe('App', () => {
-  it('exibe o nome do sistema', () => {
-    const wrapper = mount(App)
+  it('exibe o nome do sistema', async () => {
+    router.push('/')
+    await router.isReady()
+    const wrapper = mount(App, { global: { plugins: [router] } })
     expect(wrapper.text()).toContain('FIAP X')
   })
 })

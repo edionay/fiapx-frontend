@@ -9,6 +9,7 @@ autenticação, envio de vídeo, acompanhamento de status e download dos pacotes
 ## Stack
 
 - **Vue** 3 (Composition API, `<script setup>`)
+- **Vue Router** para navegação
 - **Vite** para build e desenvolvimento
 - **TypeScript**
 - **Tailwind CSS** (v4, via plugin do Vite) para estilização
@@ -71,6 +72,7 @@ eslint.config.ts              # configuração do ESLint
 src/
 ├── main.ts                   # bootstrap da aplicação Vue
 ├── App.vue                   # componente raiz
+├── router/                   # configuração do Vue Router
 ├── assets/                   # estilos base
 └── __tests__/                # testes de unidade
 ```

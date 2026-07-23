@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { RouterView } from 'vue-router'
+</script>
 
 <template>
   <div class="min-h-screen bg-slate-50 text-slate-900">
@@ -6,6 +8,8 @@
       <h1 class="text-2xl font-semibold">FIAP X</h1>
       <p class="text-slate-500">Processamento de vídeos</p>
     </header>
-    <main class="px-6 py-8"></main>
+    <main class="px-6 py-8">
+      <RouterView />
+    </main>
   </div>
 </template>
