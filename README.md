@@ -11,6 +11,7 @@ autenticação, envio de vídeo, acompanhamento de status e download dos pacotes
 - **Vue** 3 (Composition API, `<script setup>`)
 - **Vite** para build e desenvolvimento
 - **TypeScript**
+- **Tailwind CSS** (v4, via plugin do Vite) para estilização
 - **Vitest** + **Vue Test Utils** para testes
 - **ESLint** e **oxlint** para análise estática
 
