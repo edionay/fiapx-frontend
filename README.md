@@ -62,6 +62,23 @@ npm run type-check
 npm run lint
 ```
 
+## Docker
+
+O `Dockerfile` é multi-stage: um estágio compila os estáticos com o Vite e o estágio final os
+serve com **Nginx**, com fallback de SPA (todas as rotas caem no `index.html`).
+
+O endereço da API é embutido no build pela variável `VITE_API_URL` (padrão
+`http://localhost:3000`), passada como argumento de build.
+
+```bash
+docker build --build-arg VITE_API_URL="http://localhost:3000" -t fiapx-frontend .
+docker run --rm -p 8080:80 fiapx-frontend
+# a interface fica em http://localhost:8080
+```
+
+A orquestração completa da stack fica no
+[`fiapx-infra`](https://github.com/edionay/fiapx-infra).
+
 ## Integração contínua
 
 O workflow em `.github/workflows/ci.yml` roda a cada pull request e push na `main`, executando
